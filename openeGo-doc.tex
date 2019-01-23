@@ -610,8 +610,12 @@ grundsätzliche Empfehlung bei der Installation der open\_eGo-Tools unter Window
 
 \subsubsection{ego.io}
 Stelle zur Installation der Tools sicher, dass du dich in deinem angelegten Virtual Environment befindest:
-\begin{lstlisting}
+\begin{lstlisting}[language=bash]
 	conda activate open_eGo
+\end{lstlisting}
+bzw. erstelle ein solches Environment, wenn noch nicht vorhanden, per
+\begin{lstlisting}[language=bash]
+	conda create -n open_eGo
 \end{lstlisting}
 \begin{enumerate}
 	\item Download repository von \url{https://github.com/openego/ego.io}
