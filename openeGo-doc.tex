@@ -543,6 +543,152 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 	\item[] $\rightarrow$ ???
 	\item Strompreise (aus Marktsimulation, siehe Punkt bzgl. Marktsimulation)
 	\item[] $\rightarrow$ ???
+
+
+
+\end{enumerate}
+
+\section{Installation unter Windows}
+Ob die Installation unter Windows zu empfehlen ist wird sich noch zeigen. Die open\_ego-tools wurden unter Linux entwickelt, bei Windows kommt es häufig schon bei der Installation zu Problemen, die einen gro{\ss}en Zeitaufwand und viele Umwege bergen.\\
+Im aktuellen Stand (16.01.2019) l\"auft bisher nur ding0 fehlerfrei.
+
+\subsection{Programmierumgebungen und -platform}
+\subsubsection{GitHub}
+Die Installation von Github Desktop wird zum gemeinsamen - zeitgleichen und versionierten - Arbeiten an Projekten empfohlen. Damit wird auch die Git Shell (Git Bash) eingerichtet, deren Befehle die Installation der Tools vereinfachen.
+
+\subsubsection{Anaconda}
+Anaconda ist ein empfohlenes Programm zur Verwaltung von Virtual Environments, Programmierumgebungen und (Python-)Packages
+
+\begin{itemize}
+	\item von Anaconda.org die Python3.7-Version herunterladen (Python >= 3.0 (aber <=3.7) benötigt z.B. für ding0)
+	\item Es werden zwei Programme instaliert: Anaconda Prompt und Anaconda Navigator
+\end{itemize}
+
+\paragraph{Anaconda Navigator} ist ein Graphical User Interface (GUI) zur manuellen Einrichtung von Virtual Environments.\\
+		 Auswahl und Installation der Texteditoren erfolgt separat für jedes Environment.\\
+		 --> Jupyter Notebook zur Ausführung von .ipynb-Dateien (häufiges Format in Tutorials)\\
+		 --> Spyder zum Programmieren und Debugging von Python-Skripten
+
+\paragraph{Anaconda Prompt} ist ein Command-Line-Interface (CLI).\\
+Das Ausführen von Programmen, Verwalten der environments, (Ausführen von Python) ist auf die Schnelle möglich
+
+\subsection{Installationsvorbereitung}
+Es wird empfohlen, ein virtuelles Environment für die tools zu erstellen. Die nötigen Python-Packages werden jeweils in der Tool-spezifischen requirement.txt aufgelistet dann mit installiert.
+\\in Anaconda Prompt:
+\begin{lstlisting}[language=bash]
+	conda create -n open_ego
+	conda activate open_ego
+\end{lstlisting}
+
+Zur Ablage und Installation der Tools empfehle ich globalen Ordner, z.B.
+\texttt{ \textbackslash User\textbackslash Anaconda3\textbackslash pkgs}
+
+\subsection{Installation der Tools}
+grundsätzliche Empfehlung bei der Installation der open\_eGo-Tools unter Windows:
+\begin{itemize}
+\item Es tauchten zahlreiche Fehler bei der Installation mit Python3.7 auf.. ich empfehle zur Installation Python3.5.
+\item Einfache Installation per ''pip install <tool>'' nicht empfohlen - es kommen oft Fehlermeldungen aufgrund falscher Package-Bedingungen zurück\\
+-> stattdessen alle tools von GitHub herunterladen und installieren per
+ \begin{lstlisting}[language=bash]
+ pip install -e <path\to\repo>
+ \end{lstlisting}
+
+\item Können vorausgesetzte Packages bei dem Installationsprozess nicht installiert werden, finde die jeweilgen Packages unter den ''Unofficial Windows Binaries for Python Extension Packages'' von Christoph Gohlke:
+\url{https://www.lfd.uci.edu/~gohlke/pythonlibs/}
+\end{itemize}
+
+\subsubsection{OpenEnergyPlatform API}
+\begin{enumerate}
+	\item Download/Clone von Github-Repository: \url{https://github.com/OpenEnergyPlatform/oeplatform}
+	\item in Anaconda Prompt:
+	\begin{lstlisting}[language=bash]
+		conda create -n oep-api
+		activate oep-api
+		cd <path\to\downloaded\repository>
+		pip install -r requirements.txt
+	\end{lstlisting}
+\end{enumerate}
+
+\subsubsection{ego.io}
+Stelle zur Installation der Tools sicher, dass du dich in deinem angelegten Virtual Environment befindest:
+\begin{lstlisting}[language=bash]
+	conda activate open_eGo
+\end{lstlisting}
+bzw. erstelle ein solches Environment, wenn noch nicht vorhanden, per
+\begin{lstlisting}[language=bash]
+	conda create -n open_eGo
+\end{lstlisting}
+\begin{enumerate}
+	\item Download repository von \url{https://github.com/openego/ego.io}
+	\item in Anaconda Prompt:
+\begin{lstlisting}
+	pip install -e <path\to\downloaded\repo>
+\end{lstlisting}
+\end{enumerate}
+
+\subsubsection{ding0}
+Ding0 benötigt ego.io. Stelle sicher, dass die Installation bereits erfolgt ist.\\
+Ding0 scheint häufig Probleme bei der Installation der passenden matplotlib-Version zu haben. Diese treten bei mir vor allem unter Python3.7 auf. Daher nutze ich Python3.5. Nach dem Downgrade ist ein Update von pip nötig.
+\begin{lstlisting}
+	conda install python==3.5
+	python -m pip install --upgrade pip
+\end{lstlisting}
+
+Eine bekannte Hürde ist die fehlerhafte Installation von matplotlib/fiona. Die Fiona-Wheel sollte von Christoph Gohlke heruntergeladen werden: \url{https://www.lfd.uci.edu/~gohlke/pythonlibs/}
+\\-> dabei auf passende Version achten, z.B. Fiona-1.8.3-cp35-cp35m-win\_amd64.whl für Fiona=1.8.3 mit Python=3.5.x bei 64-Bit-Betriebssystem
+\\-> Python Version und build wird angezeigt, wenn python in Command Line Interface aufgerufen wird
+\begin{enumerate}
+	\item Download repository von \url{https://github.com/openego/ding0}
+	\item in Anaconda Prompt:
+\begin{lstlisting}[language=bash]
+pip install <path\to\Fiona-1.8.3-cp35-cp35m-win_amd64.whl>
+pip install -e <path\to\downloaded\ding0-dev>
+\end{lstlisting}
+\end{enumerate}
+
+\paragraph{Zusatz: } bei Fehler \texttt{BUILDING MATPLOTLIB [...] * The following required packages can not be built: * freetype, png}, versuche folgende Schritte:\\
+-> passende wheel-Datei von Christoph Gohlke herunterladen, hier z.b. \texttt{matplotlib-3.0.2-cp37-cp37m-win\_amd64.whl}\\
+\begin{lstlisting}[language=bash]
+	 pip install <path\to\matplotlib-3.0.2-cp37-cp37m-win_amd64.whl>\\
+	 pip install matplotlib\\
+	 pip install freetype-py\\
+	 pip install png_util\\
+	 pip install -e <path\to\downloaded\ding0-dev>\\
+	 ...
+\end{lstlisting}
+
+\subsubsection{eGo}
+\begin{enumerate}
+	\item Microsoft visual C++ >= 14.0 ist benötigt. Intallierte Versionen können in Systemsteuerung->Apps eingesehen werden. Neue Versionen können mit Microsoft Visual Studio (Community) 2017 bezogen werden.
+	\item eGo benötigt PyPSA. Führe in Anaconda Prompt aus:
+	\begin{lstlisting}[language=bash]
+		pip3 install -e git+https://github.com/openego/PyPSA@master#egg=0.11.0fork
+	\end{lstlisting}
+	\item Installation von eGo:
+	\begin{lstlisting}[language=bash]
+		pip3 install eGo --process-dependency-links
+	\end{lstlisting}
+\end{enumerate}
+
+\paragraph{Zusatz: }falls Probleme mit den Packages Pandas/Fiona auftauchen:
+\begin{itemize}
+\item wheel-Datei von Christoph Gohlke herunterladen: \url{https://www.lfd.uci.edu/~gohlke/pythonlibs/}
+\item dabei auf passende Version achten, z.B. Fiona-1.8.3-cp35-cp35m-win\_amd64.whl für Fiona=1.8.3 mit Python=3.5.x bei 64-Bit-Betriebssystem
+\item Python Version und build wird angezeigt, wenn python in Command Line Interface aufgerufen wird
+
+\end{itemize}
+
+\subsubsection{eDisGo}
+fun fact: - eDisGo scheint bei der installation pypsa0.11.0fork zu deinstallieren (und nicht zu reinstallieren).. vor der Installation von eTraGo muss daher PyPSA wieder installiert werden..\\
+
+Installation von eDisGo
+\begin{enumerate}
+	\item download from \url{https://github.com/openego/edisgo}\\
+	\item in Anaconda Prompt:
+	\begin{lstlisting}[language=bash]
+		pip3 install -e <path\to\repo>
+	\end{lstlisting}
+=======
 	
 	
 \end{enumerate}
