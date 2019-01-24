@@ -46,6 +46,7 @@ a4paper,     %% defines the paper size: a4paper (default), a5paper, letterpaper,
 %%% encoding and language set
 %%%
 %\usepackage{underscore}
+\usepackage{ulem}
 %%% ngerman: language set to new-german
 \usepackage{ngerman}
 \usepackage{lipsum}
@@ -479,7 +480,14 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 	\item[] $\rightarrow$ Netzausbau und entsprechende Kosten sind berücksichtigt; inwiefern Trassenbau einfließt ist aktuell unklar
 	
 	\item Ist es möglich, neue Anlage hinzuzufügen und zu berechnen?
+<<<<<<< HEAD
 	\item[] $\rightarrow$ nach aktuellem Kenntnisstand nur über Daten-Nachtrag in (eigener) oedb-Liste 
+=======
+	\item[] $\rightarrow$ nach aktuellem Kenntnisstand nur über Daten-Nachtrag in (eigener) oedb-Liste
+
+	\item[] $\rightarrow$ eigene Netzwerk-konfiguration mit PyPSA [QUELLE???] möglich
+
+>>>>>>> 30b1a948a219a7f7de028ff67a5e42b831a992c4
 	\item Wie wird der oedb-Token verwendet?
 	\item[] $\rightarrow$ siehe Abschnitt(\ref{acc-oedb}), Punkte 4-6
 	
@@ -500,13 +508,30 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 	\begin{enumerate}
 		\item Kann der optimale Kraftwerkspark auf Basis von linearer Optimierung ermittelt werden?
 		\item[]$\rightarrow$ ?
+<<<<<<< HEAD
 		\item[] auf Basis der oedb Daten; nach aktuellem Kenntnisstand keine eigene KW-Standort-/Typ-Optimierung
+=======
+
+		\item[] auf Basis der oedb Daten; nach aktuellem Kenntnisstand keine eigene KW-Standort-/Typ-Optimierung ???
+>>>>>>> 30b1a948a219a7f7de028ff67a5e42b831a992c4
 		
 		\item Kann der optimale Dispatch ermittelt werden?
-		\item[] (Ich glaube umgesetzt über nodal pricing, oder?)
+		\item[] (David B.: Ich glaube umgesetzt über nodal pricing, oder?)
 		\item[]$\rightarrow$ via PyPSA
 		\item[] \textit{aktuell kein detaillierteres Wissen}
+<<<<<<< HEAD
 		
+=======
+
+		\item[] ??? Based on a marginal cost driven power plant dispatch, being subject to grid restrictions, congested power
+		lines were identified. [Mueller 2018]???
+		\item[] -> The LOPF additionally allows investive optimization of capacity
+		extension, which will be a major part of future open eGo modelling, but is not considered in
+		this work.[Mueller2018]
+		\item[] Mueller: feasibility problems (p.12)
+		\item[] OSM mapping quality in cities low!
+
+>>>>>>> 30b1a948a219a7f7de028ff67a5e42b831a992c4
 		\item Wie granular ist die Marktsimulation (werden Anlagen aus den synthetischen MS/NS Netzen für die Deckung der Leistungsbilanz voll herangezogen?)
 		\item[]$\rightarrow$ nach Verständnis der Autoren: ja
 		\item Zeitlich aufgelöster Erzeugungsmix mit Strompreisen und CO2-Intensität ermittelbar?
@@ -525,6 +550,8 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 	\item[] $\rightarrow$ ???
 	\item Wie sind die Szenarien umgesetzt, welche Parameter werden hier variiert?
 	\item[] $\rightarrow$ ???
+	\item[] $\rightarrow$ Abb [Mueller2018???] Tab5
+	\item[] $\rightarrow$ \url{https://osf.io/bpf36/} // loads-> Huelk2017???
 	\item Sind die relevanten Energiewandlungstechnologien abgebildet oder benötigt man immer schon ''fertige'' Zeitreihen?
 	\item[] $\rightarrow$ ???
 \end{enumerate}
@@ -543,10 +570,163 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 	\item[] $\rightarrow$ ???
 	\item Strompreise (aus Marktsimulation, siehe Punkt bzgl. Marktsimulation)
 	\item[] $\rightarrow$ ???
+<<<<<<< HEAD
 	
 	
 \end{enumerate}
 
+=======
+
+
+
+\end{enumerate}
+
+\section{Installation unter Windows}
+Ob die Installation unter Windows zu empfehlen ist wird sich noch zeigen. Die open\_ego-tools wurden unter Linux entwickelt, bei Windows kommt es häufig schon bei der Installation zu Problemen, die einen gro{\ss}en Zeitaufwand und viele Umwege bergen.\\
+Im aktuellen Stand (16.01.2019) l\"auft bisher nur ding0 fehlerfrei.
+
+\subsection{Programmierumgebungen und -platform}
+\subsubsection{GitHub}
+Die Installation von Github Desktop wird zum gemeinsamen - zeitgleichen und versionierten - Arbeiten an Projekten empfohlen. Damit wird auch die Git Shell (Git Bash) eingerichtet, deren Befehle die Installation der Tools vereinfachen.
+
+\subsubsection{Anaconda}
+Anaconda ist ein empfohlenes Programm zur Verwaltung von Virtual Environments, Programmierumgebungen und (Python-)Packages
+
+\begin{itemize}
+	\item von Anaconda.org die Python3.7-Version herunterladen (Python $\geq$ 3.0 (\uline{aber $\leq$3.7!!}) benötigt z.B. für ding0)
+	\item Es werden zwei Programme instaliert: Anaconda Prompt und Anaconda Navigator
+\end{itemize}
+
+\paragraph{Anaconda Navigator} ist ein Graphical User Interface (GUI) zur manuellen Einrichtung von Virtual Environments.\\
+		 Auswahl und Installation der Texteditoren erfolgt separat für jedes Environment.\\
+		 $\rightarrow$ Jupyter Notebook zur Ausführung von .ipynb-Dateien (häufiges Format in Tutorials)\\
+		 $\rightarrow$ Spyder zum Programmieren und Debugging von Python-Skripten
+
+\paragraph{Anaconda Prompt} ist ein Command-Line-Interface (CLI).\\
+Das Ausführen von Programmen, Verwalten der environments, (Ausführen von Python) ist auf die Schnelle möglich
+
+\subsection{Installationsvorbereitung}
+Es wird empfohlen, ein virtuelles Environment für die tools zu erstellen. Die nötigen Python-Packages werden jeweils in der Tool-spezifischen requirement.txt aufgelistet dann mit installiert.
+\\in Anaconda Prompt:
+\begin{lstlisting}[language=bash]
+	conda create -n open_ego
+	conda activate open_ego
+\end{lstlisting}
+
+Zur Ablage und Installation der Tools empfehle ich globalen Ordner, z.B.\\
+\noindent \hspace*{15mm} \texttt{ \textbackslash User\textbackslash Anaconda3\textbackslash pkgs}
+
+\subsection{Installation der Tools}
+grundsätzliche Empfehlung bei der Installation der open\_eGo-Tools unter Windows:
+\begin{itemize}
+\item Es tauchten zahlreiche Fehler bei der Installation mit Python3.7 auf.. ich empfehle zur Installation Python3.5.
+\item Einfache Installation per ''pip install <tool>'' nicht empfohlen - es kommen oft Fehlermeldungen aufgrund falscher Package-Bedingungen zurück\\
+$\rightarrow$ stattdessen alle tools von GitHub herunterladen und installieren per
+ \begin{lstlisting}[language=bash]
+ pip install -e <path\to\repo>
+ \end{lstlisting}
+
+\item Können vorausgesetzte Packages bei dem Installationsprozess nicht installiert werden, finde die jeweilgen Packages unter den ''Unofficial Windows Binaries for Python Extension Packages'' von Christoph Gohlke:
+\url{https://www.lfd.uci.edu/~gohlke/pythonlibs/}
+\end{itemize}
+
+\subsubsection{Installation der OpenEnergyPlatform API}
+\begin{enumerate}
+	\item Download/Clone von Github-Repository: \url{https://github.com/OpenEnergyPlatform/oeplatform}
+	\item in Anaconda Prompt:
+	\begin{lstlisting}[language=bash]
+		conda create -n oep-api
+		activate oep-api
+		cd <path\to\downloaded\repository>
+		pip install -r requirements.txt
+	\end{lstlisting}
+\end{enumerate}
+
+\subsubsection{Installation von ego.io}
+Stelle zur Installation der Tools sicher, dass du dich in deinem angelegten Virtual Environment befindest:
+\begin{lstlisting}[language=bash]
+	conda activate open_eGo
+\end{lstlisting}
+bzw. erstelle ein solches Environment, wenn noch nicht vorhanden, per
+\begin{lstlisting}[language=bash]
+	conda create -n open_eGo
+\end{lstlisting}
+\begin{enumerate}
+	\item Download repository von \url{https://github.com/openego/ego.io}
+	\item in Anaconda Prompt:
+\begin{lstlisting}
+	pip install -e <path\to\downloaded\repo>
+\end{lstlisting}
+\end{enumerate}
+
+\subsubsection{Installation von ding0}
+Ding0 benötigt ego.io. Stelle sicher, dass die Installation bereits erfolgt ist.\\
+Ding0 scheint häufig Probleme bei der Installation der passenden matplotlib-Version zu haben. Diese treten bei mir vor allem unter Python3.7 auf. Daher nutze ich Python3.5. Nach dem Downgrade ist ein Update von pip nötig.
+\begin{lstlisting}
+	conda install python==3.5
+	python -m pip install --upgrade pip
+\end{lstlisting}
+
+Eine bekannte Hürde ist die fehlerhafte Installation von matplotlib/fiona. Die Fiona-Wheel sollte von Christoph Gohlke heruntergeladen werden: \url{https://www.lfd.uci.edu/~gohlke/pythonlibs/}
+\\$\rightarrow$ dabei auf passende Version achten, z.B. Fiona-1.8.3-cp35-cp35m-win\_amd64.whl für Fiona=1.8.3 mit Python=3.5.x bei 64-Bit-Betriebssystem
+\\$\rightarrow$ Python Version und build wird angezeigt, wenn python in Command Line Interface aufgerufen wird
+\begin{enumerate}
+	\item Download repository von \url{https://github.com/openego/ding0}
+	\item in Anaconda Prompt:
+\begin{lstlisting}[language=bash]
+pip install <path\to\Fiona-1.8.3-cp35-cp35m-win_amd64.whl>
+pip install -e <path\to\downloaded\ding0-dev>
+\end{lstlisting}
+\end{enumerate}
+
+\paragraph{Zusatz: } bei Fehler \texttt{BUILDING MATPLOTLIB [...] * The following required packages can not be built: * freetype, png}, versuche folgende Schritte:\\
+$\rightarrow$ passende wheel-Datei von Christoph Gohlke herunterladen, hier z.b. \texttt{matplotlib-3.0.2-cp37-cp37m-win\_amd64.whl}\\
+\begin{lstlisting}[language=bash]
+	 pip install <path\to\matplotlib-3.0.2-cp37-cp37m-win_amd64.whl>\\
+	 pip install matplotlib\\
+	 pip install freetype-py\\
+	 pip install png_util\\
+	 pip install -e <path\to\downloaded\ding0-dev>\\
+	 ...
+\end{lstlisting}
+
+\subsubsection{Installation von eGo}
+\begin{enumerate}
+	\item Microsoft visual C++ $\geq$ 14.0 ist benötigt. Intallierte Versionen können in Systemsteuerung$\rightarrow$Apps eingesehen werden. Neue Versionen können mit Microsoft Visual Studio (Community) 2017 bezogen werden.
+	\item eGo benötigt PyPSA. Führe in Anaconda Prompt aus:
+	\begin{lstlisting}[language=bash]
+		pip3 install -e git+https://github.com/openego/PyPSA@master#egg=0.11.0fork
+	\end{lstlisting}
+	\item Installation von eGo:
+	\begin{lstlisting}[language=bash]
+		pip3 install eGo --process-dependency-links
+	\end{lstlisting}
+\end{enumerate}
+
+\paragraph{Zusatz: }falls Probleme mit den Packages Pandas/Fiona auftauchen:
+\begin{itemize}
+\item wheel-Datei von Christoph Gohlke herunterladen: \url{https://www.lfd.uci.edu/~gohlke/pythonlibs/}
+\item dabei auf passende Version achten, z.B. Fiona-1.8.3-cp35-cp35m-win\_amd64.whl für Fiona=1.8.3 mit Python=3.5.x bei 64-Bit-Betriebssystem
+\item Python Version und build wird angezeigt, wenn python in Command Line Interface aufgerufen wird
+
+\end{itemize}
+
+\subsubsection{Installation von eDisGo}
+fun fact: - eDisGo scheint bei der installation pypsa0.11.0fork zu deinstallieren (und nicht zu reinstallieren).. vor der Installation von eTraGo muss daher PyPSA wieder installiert werden..\\
+
+Installation von eDisGo
+\begin{enumerate}
+	\item download from \url{https://github.com/openego/edisgo}\\
+	\item in Anaconda Prompt:
+	\begin{lstlisting}[language=bash]
+		pip3 install -e <path\to\repo>
+	\end{lstlisting}
+
+
+
+\end{enumerate}
+
+>>>>>>> 30b1a948a219a7f7de028ff67a5e42b831a992c4
 
 %\section{Anmerkung}
 %grid-data auf oedb???
@@ -1154,11 +1334,24 @@ Bislang sind, wie im vorangestellten  Abschnitt(\ref{param-opt}) beinhaltet, 3 S
 	\item NEP 2035
 	\begin{itemize}
 		\item[] Verweis auf NEP2025 Daten:
+<<<<<<< HEAD
 		\\\url{https://www.netzentwicklungsplan.de/sites/default/files/paragraphs-files/kostenschaetzungen_nep_2025_1_entwurf.pdf} 
+=======
+		\\\url{https://www.netzentwicklungsplan.de/sites/default/files/paragraphs-files/kostenschaetzungen_nep_2025_1_entwurf.pdf}
+
+		\item[] conv. Gen.: \url{https://www.netzentwicklungsplan.de/sites/default/files/paragraphs-files/nep_2015_kraftwerksliste_entwurf_140430.pdf}
+		\item[] CHP: Kropshofer M 2017 Erstellung und Implementierung einer Methodik zur Verteilung von KWK-Anlagen
+		Project report Europa-Universität Flensburg
+		\item[] PV+Wind: Based on this, representative units were defined for each municipality and
+		were then proportionaly extended in future scenarios.
+
+>>>>>>> 30b1a948a219a7f7de028ff67a5e42b831a992c4
 	\end{itemize}
 	\item ego100
 	\begin{itemize}
 		\item projekt-eigenes Szenario: 100\% EE
+		\item[]The allocation for the 100% scenario data is based on the same methods and its scenario-
+		specific assumptions of installed capacities per technology.
 	\end{itemize}
 \end{itemize}
 Der betrachtete Szenario-Rahmen kann durch das Praefix ''SH'' auf Schleswig-Holstein  eingeschränkt werden. 
