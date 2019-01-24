@@ -481,6 +481,9 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 
 	\item Ist es möglich, neue Anlage hinzuzufügen und zu berechnen?
 	\item[] $\rightarrow$ nach aktuellem Kenntnisstand nur über Daten-Nachtrag in (eigener) oedb-Liste
+
+	\item[] $\rightarrow$ eigene Netzwerk-konfiguration mit PyPSA [QUELLE???] möglich
+
 	\item Wie wird der oedb-Token verwendet?
 	\item[] $\rightarrow$ siehe Abschnitt(\ref{acc-oedb}), Punkte 4-6
 
@@ -501,12 +504,21 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 	\begin{enumerate}
 		\item Kann der optimale Kraftwerkspark auf Basis von linearer Optimierung ermittelt werden?
 		\item[]$\rightarrow$ ?
-		\item[] auf Basis der oedb Daten; nach aktuellem Kenntnisstand keine eigene KW-Standort-/Typ-Optimierung
 
+		\item[] auf Basis der oedb Daten; nach aktuellem Kenntnisstand keine eigene KW-Standort-/Typ-Optimierung ???
+		
 		\item Kann der optimale Dispatch ermittelt werden?
-		\item[] (Ich glaube umgesetzt über nodal pricing, oder?)
+		\item[] (David B.: Ich glaube umgesetzt über nodal pricing, oder?)
 		\item[]$\rightarrow$ via PyPSA
 		\item[] \textit{aktuell kein detaillierteres Wissen}
+
+		\item[] ??? Based on a marginal cost driven power plant dispatch, being subject to grid restrictions, congested power
+		lines were identified. [Mueller 2018]???
+		\item[] -> The LOPF additionally allows investive optimization of capacity
+		extension, which will be a major part of future open eGo modelling, but is not considered in
+		this work.[Mueller2018]
+		\item[] Mueller: feasibility problems (p.12)
+		\item[] OSM mapping quality in cities low!
 
 		\item Wie granular ist die Marktsimulation (werden Anlagen aus den synthetischen MS/NS Netzen für die Deckung der Leistungsbilanz voll herangezogen?)
 		\item[]$\rightarrow$ nach Verständnis der Autoren: ja
@@ -526,6 +538,8 @@ Diese Dokumentation beinhaltet o.g. Inhalte und versucht die folgenden Fragestel
 	\item[] $\rightarrow$ ???
 	\item Wie sind die Szenarien umgesetzt, welche Parameter werden hier variiert?
 	\item[] $\rightarrow$ ???
+	\item[] $\rightarrow$ Abb [Mueller2018???] Tab5
+	\item[] $\rightarrow$ \url{https://osf.io/bpf36/} // loads-> Huelk2017???
 	\item Sind die relevanten Energiewandlungstechnologien abgebildet oder benötigt man immer schon ''fertige'' Zeitreihen?
 	\item[] $\rightarrow$ ???
 \end{enumerate}
@@ -689,7 +703,7 @@ Installation von eDisGo
 	\begin{lstlisting}[language=bash]
 		pip3 install -e <path\to\repo>
 	\end{lstlisting}
-=======
+
 
 
 \end{enumerate}
@@ -1302,10 +1316,19 @@ Bislang sind, wie im vorangestellten  Abschnitt(\ref{param-opt}) beinhaltet, 3 S
 	\begin{itemize}
 		\item[] Verweis auf NEP2025 Daten:
 		\\\url{https://www.netzentwicklungsplan.de/sites/default/files/paragraphs-files/kostenschaetzungen_nep_2025_1_entwurf.pdf}
+
+		\item[] conv. Gen.: \url{https://www.netzentwicklungsplan.de/sites/default/files/paragraphs-files/nep_2015_kraftwerksliste_entwurf_140430.pdf}
+		\item[] CHP: Kropshofer M 2017 Erstellung und Implementierung einer Methodik zur Verteilung von KWK-Anlagen
+		Project report Europa-Universität Flensburg
+		\item[] PV+Wind: Based on this, representative units were defined for each municipality and
+		were then proportionaly extended in future scenarios.
+
 	\end{itemize}
 	\item ego100
 	\begin{itemize}
 		\item projekt-eigenes Szenario: 100\% EE
+		\item[]The allocation for the 100% scenario data is based on the same methods and its scenario-
+		specific assumptions of installed capacities per technology.
 	\end{itemize}
 \end{itemize}
 Der betrachtete Szenario-Rahmen kann durch das Praefix ''SH'' auf Schleswig-Holstein  eingeschränkt werden.
